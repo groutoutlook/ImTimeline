@@ -75,7 +75,7 @@ public:
     s32 GetPixelPositionAtTimestamp(s32 timestamp);
 
     f32 GetScale() const { return mZoom; }
-    void SetScale(f32 scale) { mZoom = scale; }
+    void SetScale(f32 scale) { mZoom = mZoomLerpTarget = scale; }
 
     f32 GetStartTimestamp() const { return mStartFrame; }
     void SetStartTimestamp(s32 timestamp) { mStartFrame = timestamp; }
