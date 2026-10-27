@@ -124,7 +124,7 @@ void HorizontalNodeView::defaultNodeDraw(const ImRect& area, const TimelineNode&
 
     if (node.GetCustomNode() && node.mFlags.test(eTimelineNodeFlags::TimelineNodeFlags_CustomDraw)) {
         node.GetCustomNode()->OnDraw(node, area, bSelected);
-ImGui::Dummy(area.GetSize());
+        ImGui::Dummy(area.GetSize());
         return;
     }
 
@@ -160,7 +160,7 @@ ImGui::Dummy(area.GetSize());
     } else {
         draw_list->AddRect(outlineRect.Min, outlineRect.Max - ImVec2(borderThickness, borderThickness), fgColor, borderRadius, 0, borderThickness);
     }
-ImGui::Dummy(area.GetSize());
+    ImGui::Dummy(area.GetSize());
 }
 
 void HorizontalNodeView::PerformanceDebugUI() const

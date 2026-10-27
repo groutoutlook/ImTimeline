@@ -133,7 +133,8 @@ TimelineNode& Timeline::AddNewNodeWithData(s32 section, s32 start, s32 end, cons
                                            std::shared_ptr<CustomNodeBase> customNodeUI)
 {
     auto& node = AddNewNode(section, start, end, text, std::move(customNodeUI));
-    node.SetUserData(std::move(userData));
+	if (node.GetID() != InvalidNodeID)
+		node.SetUserData(std::move(userData));
     return node;
 }
 
