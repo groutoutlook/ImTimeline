@@ -441,7 +441,11 @@ bool Timeline::DrawTimeline()
 
     // zoom in/out
     mVisibleFrameCount = (int)floorf((canvas_size.x - mStyle.LegendWidth) / mZoom);
-    mStartFrame += mInputData.MouseScrollVertical * mInputData.ScrollDirection * mInputData.ScrollSpeed;
+    if (mInputData.MouseScrollVertical != 0.0f && io.KeyCtrl) {
+        mZoomLerpTarget = ImClamp(mZoomLerpTarget * powf(1.15f, mInputData.MouseScrollVertical), 0.05f, 80.0f);
+    } else {
+        mStartFrame += mInputData.MouseScrollVertical * mInputData.ScrollDirection * mInputData.ScrollSpeed;
+    }
     mStartFrame = ImClamp(mStartFrame, mFrameMin, mFrameMax - mVisibleFrameCount);
     mZoom = ImLerp(mZoom, mZoomLerpTarget, 0.10f);
 

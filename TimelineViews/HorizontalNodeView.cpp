@@ -72,7 +72,7 @@ void HorizontalNodeView::DrawNodeView(const ImRect &area, const sTimelineSection
             return;
         }
 
-        s32 scale = pContext->GetScale();
+        const f32 scale = pContext->GetScale();
 
         ImVec2 slotP1(timelinePanelRect.Min.x + node.start * scale, timelinePanelRect.Min.y);
         ImVec2 slotP2(timelinePanelRect.Min.x + node.end * scale + scale, slotP1.y + sectionHeight - node.displayProperties.AccentThickness);
@@ -151,7 +151,11 @@ void HorizontalNodeView::defaultNodeDraw(const ImRect& area, const TimelineNode&
 
     //draw_list->AddRectFilled(outlineRect.Min, outlineRect.Max, bgColor, borderRadius);
     draw_list->AddRectFilledMultiColor(outlineRect.Min, outlineRect.Max, gradientStart, gradientStart, gradientEnd, gradientEnd);
-    draw_list->AddText(area.Min + ImVec2(node.displayProperties.AccentThickness, node.displayProperties.AccentThickness), node.displayProperties.mForegroundColor, node.displayText.c_str());
+    if (outlineRect.GetWidth() >= 42.0f) {
+        draw_list->PushClipRect(outlineRect.Min, outlineRect.Max, true);
+        draw_list->AddText(area.Min + ImVec2(node.displayProperties.AccentThickness, node.displayProperties.AccentThickness), node.displayProperties.mForegroundColor, node.displayText.c_str());
+        draw_list->PopClipRect();
+    }
 
     //TODO: ADD Text Clipping when text goes out of scope
     f32 borderThickness = node.displayProperties.BorderThickness;
