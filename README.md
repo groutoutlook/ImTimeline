@@ -42,6 +42,19 @@ mTimeline.AddNewNode(CATEGORY_SWEETS_ID, 10, 30, "Pudding");
 mTimeline.AddNewNode(CATEGORY_DRINKS_ID, 20, 40, "Coffee");
 mTimeline.AddNewNode(CATEGORY_DRINKS_ID, 45, 60, "Cafe Latte", std::make_shared<CustomNodeTest>());
 mTimeline.AddNewNode(CATEGORY_FOOD_ID, 25, 70, "Pasta");
+
+struct EffectKeyframe : TimelineNodeData {
+    std::string effectName;
+    int mode = 0;
+    int config = 0;
+};
+
+auto keyframe = std::make_shared<EffectKeyframe>();
+keyframe->effectName = "Pulse";
+keyframe->mode = 2;
+keyframe->config = 1;
+auto& effectNode = mTimeline.AddNewNodeWithData(
+    CATEGORY_FOOD_ID, 70, 95, "Pulse", keyframe);
     
 auto& displayProps = mTimeline.GetSectionDisplayProperties(CATEGORY_DRINKS_ID);
 displayProps.mHeight = 70.0f;
@@ -51,6 +64,12 @@ In your draw logic
 ```cpp
 mTimeline.DrawDebugGUI();
 mTimeline.DrawTimeline();
+
+if (auto* selected = mTimeline.GetSelectedNode()) {
+    if (auto keyframe = selected->GetUserData<EffectKeyframe>()) {
+        // Use the selected keyframe's effectName, mode, and config in the host app.
+    }
+}
 ```
 
 

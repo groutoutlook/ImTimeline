@@ -128,6 +128,15 @@ TimelineNode& Timeline::AddNewNode(s32 section, s32 start, s32 end, const std::s
     return mEmptyDummyNode;
 }
 
+TimelineNode& Timeline::AddNewNodeWithData(s32 section, s32 start, s32 end, const std::string& text,
+                                           std::shared_ptr<TimelineNodeData> userData,
+                                           std::shared_ptr<CustomNodeBase> customNodeUI)
+{
+    auto& node = AddNewNode(section, start, end, text, std::move(customNodeUI));
+    node.SetUserData(std::move(userData));
+    return node;
+}
+
 /* NODE MOVE & COMMAND LOGIC */
 
 void Timeline::MoveNode(TimelineNode* node, s32 newStart, s32 newSection)

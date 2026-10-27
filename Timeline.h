@@ -48,6 +48,9 @@ public:
 
     TimelineNode* AddNewNode(TimelineNode* node);
     TimelineNode& AddNewNode(s32 section, s32 start, s32 end, const std::string& text = "", std::shared_ptr<CustomNodeBase> customNodeUI = nullptr);
+    TimelineNode& AddNewNodeWithData(s32 section, s32 start, s32 end, const std::string& text,
+                                     std::shared_ptr<TimelineNodeData> userData,
+                                     std::shared_ptr<CustomNodeBase> customNodeUI = nullptr);
     void DeleteItem(s32 section, s32 start, s32 end);
     void DeleteSelection();
     void DeleteSection(s32 section);

@@ -66,6 +66,11 @@ struct sGenericDisplayProperties {
 
 class CustomNodeBase;
 
+class TimelineNodeData {
+public:
+    virtual ~TimelineNodeData() = default;
+};
+
 namespace ImTimeline {
 class Timeline;
 }
@@ -84,6 +89,13 @@ struct TimelineNode {
     NodeID GetID() const { return ID; }
     s32 GetSection() const { return section; }
     std::shared_ptr<CustomNodeBase> GetCustomNode() const { return CustomNode; }
+    void SetUserData(std::shared_ptr<TimelineNodeData> data) { mUserData = std::move(data); }
+
+    template <typename T>
+    std::shared_ptr<T> GetUserData() const
+    {
+        return std::dynamic_pointer_cast<T>(mUserData);
+    }
 
     bool operator<(const TimelineNode& other) const
     {
@@ -117,6 +129,7 @@ struct TimelineNode {
 
 private:
     std::shared_ptr<CustomNodeBase> CustomNode = nullptr;
+    std::shared_ptr<TimelineNodeData> mUserData;
     NodeID ID = InvalidNodeID;
     s32 section = 0;
 
