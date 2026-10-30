@@ -70,6 +70,8 @@ public:
     s32 GetMaxFrame() const { return mFrameMax; }
     void SelectNode(TimelineNode* node) { mSelectedNode = node; };
     TimelineNode* GetSelectedNode() const { return mSelectedNode; }
+    TimelineNode* GetHoveredNode() const { return mHoveredNode; }
+    void SetHoveredNode(TimelineNode* node) { mHoveredNode = node; }
 
     s32 GetTimestampAtPixelPosition(f32 pixelPosition);
     s32 GetPixelPositionAtTimestamp(s32 timestamp);
@@ -125,6 +127,7 @@ protected:
 
     std::shared_ptr<TimelinePlayer> mMainPlayer;
     TimelineNode* mSelectedNode = nullptr;
+    TimelineNode* mHoveredNode = nullptr;
 
 private:
     void CollectInputData(sInputData& a_outInputData, f32 aDeltaTime);

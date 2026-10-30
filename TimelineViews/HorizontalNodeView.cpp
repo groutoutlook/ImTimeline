@@ -86,6 +86,9 @@ void HorizontalNodeView::DrawNodeView(const ImRect &area, const sTimelineSection
             return;
         }
 
+        if (nodeRect.Contains(pContext->GetLastInputData().MousePos))
+            pContext->SetHoveredNode(&node);
+
         defaultNodeDraw(nodeRect, node, pContext);
 
 #if defined IM_TIMELINE_DEBUG_INFO

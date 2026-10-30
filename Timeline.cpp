@@ -430,6 +430,8 @@ bool Timeline::DrawTimeline()
 {
     ScopedTimer timer = ScopedTimer("Timeline Draw");
 
+    mHoveredNode = nullptr;
+
     ImGuiIO& io = ImGui::GetIO();
     CollectInputData(mInputData, io.DeltaTime);
     updateTimelinePlayer(io.DeltaTime);
