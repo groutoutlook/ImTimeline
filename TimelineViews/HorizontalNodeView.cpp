@@ -151,7 +151,7 @@ void HorizontalNodeView::defaultNodeDraw(const ImRect& area, const TimelineNode&
 
     //draw_list->AddRectFilled(outlineRect.Min, outlineRect.Max, bgColor, borderRadius);
     draw_list->AddRectFilledMultiColor(outlineRect.Min, outlineRect.Max, gradientStart, gradientStart, gradientEnd, gradientEnd);
-    if (outlineRect.GetWidth() >= 42.0f) {
+    if (outlineRect.GetWidth() >= 8.0f) {
         draw_list->PushClipRect(outlineRect.Min, outlineRect.Max, true);
         draw_list->AddText(area.Min + ImVec2(node.displayProperties.AccentThickness, node.displayProperties.AccentThickness), node.displayProperties.mForegroundColor, node.displayText.c_str());
         draw_list->PopClipRect();

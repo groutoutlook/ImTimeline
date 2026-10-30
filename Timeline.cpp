@@ -1139,12 +1139,12 @@ void Timeline::CollectInputData(sInputData& a_outInputData, f32 aDeltaTime)
     mInputData.MouseScrollVertical = io.MouseWheel;
     // mInputData.MouseDownDuration += io.MouseDownDuration[0];
 
-    if (io.KeysDown[ImGuiKey_Delete] || io.KeysDown[ImGuiKey_Backspace]) {
+    if (ImGui::IsKeyDown(ImGuiKey_Delete) || ImGui::IsKeyDown(ImGuiKey_Backspace)) {
         // DeleteSelection();
         mNextActionFlags.set(eNextAction::ActionDelete);
     }
 
-    if (io.KeysDown[ImGuiKey_LeftCtrl] & io.KeysDown[ImGuiKey_Z]) {
+    if ((ImGui::IsKeyDown(ImGuiKey_LeftCtrl) && ImGui::IsKeyDown(ImGuiKey_Z))) {
         // DeleteSelection();
         mNextActionFlags.set(eNextAction::ActionUndo);
     }
