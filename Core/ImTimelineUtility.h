@@ -1,5 +1,5 @@
 #pragma once
-#include "../dependencies/imgui/imgui.h"
+#include "imgui.h"
 #include "CoreDefines.h"
 
 class ImTimelineUtility {

@@ -4,7 +4,7 @@
 #include <chrono>
 #include <string>
 #include <unordered_map>
-#include "../dependencies/imgui/imgui.h"
+#include "imgui.h"
 
 class ScopedTimer 
 {
