@@ -447,9 +447,15 @@ bool Timeline::DrawTimeline()
     if (mInputData.MouseScrollVertical != 0.0f && io.KeyCtrl) {
         mZoomLerpTarget = ImClamp(mZoomLerpTarget * powf(1.15f, mInputData.MouseScrollVertical), 0.05f, 80.0f);
     } else {
-        mStartFrame += mInputData.MouseScrollVertical * mInputData.ScrollDirection * mInputData.ScrollSpeed;
+        f32 horizontalScroll = -mInputData.MouseScrollHorizontal;
+        if (io.KeyShift) {
+            horizontalScroll += mInputData.MouseScrollVertical * mInputData.ScrollDirection;
+        } else {
+            mStartFrame += mInputData.MouseScrollVertical * mInputData.ScrollDirection * mInputData.ScrollSpeed;
+        }
+        mStartFrame += horizontalScroll * mInputData.ScrollSpeed;
     }
-    mStartFrame = ImClamp(mStartFrame, mFrameMin, mFrameMax - mVisibleFrameCount);
+    mStartFrame = ImClamp(mStartFrame, mFrameMin, ImMax(mFrameMax - mVisibleFrameCount, mFrameMin));
     mZoom = ImLerp(mZoom, mZoomLerpTarget, 0.10f);
 
     if (mVisibleFrameCount >= frameCount && mStartFrame)
@@ -1140,6 +1146,7 @@ void Timeline::CollectInputData(sInputData& a_outInputData, f32 aDeltaTime)
     mInputData.LeftMouseDown = io.MouseDown[0];
     mInputData.RightMouseDown = io.MouseDown[1];
     mInputData.MouseScrollVertical = io.MouseWheel;
+    mInputData.MouseScrollHorizontal = io.MouseWheelH;
     // mInputData.MouseDownDuration += io.MouseDownDuration[0];
 
     if (ImGui::IsKeyDown(ImGuiKey_Delete) || ImGui::IsKeyDown(ImGuiKey_Backspace)) {
