@@ -12,7 +12,8 @@ Timeline::Timeline()
 {
     mEmptyDummyNode.mFlags.set(eTimelineNodeFlags::TimelineNodeFlags_UseSectionBackground, true);
     mEmptyDummyNode.mFlags.set(eTimelineNodeFlags::TimelineNodeFlags_AutofitHeight, true);
-    mEmptyDummyNode.mFlags.set(eTimelineNodeFlags::TimelineNodeFlags_MoveSurroundingNodesToTheRight, true);
+    // Sled reviews authored CSV timing, including overlapping keyframes.
+    mEmptyDummyNode.mFlags.set(eTimelineNodeFlags::TimelineNodeFlags_MoveSurroundingNodesToTheRight, false);
     mEmptyDummyNode.mFlags.set(eTimelineNodeFlags::TimelineNodeFlags_MovedToDifferentTimeline, false);
 
     mMainPlayer = std::make_shared<TimelinePlayer>();

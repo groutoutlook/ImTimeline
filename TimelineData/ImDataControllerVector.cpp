@@ -109,8 +109,8 @@ TimelineNode& VectorContainer::emplace_back_direct(TimelineNode& newElement, con
         }
 
         IM_ASSERT(mContainer.capacity() > mContainer.size());
-        mContainer.insert(itInsert, newElement);
-        lastInsertedNode = &*itInsert; // TODO there's nothing wrong with it but I dont like this
+        // insert invalidates itInsert even when capacity does not change.
+        lastInsertedNode = &*mContainer.insert(itInsert, newElement);
     }
 
     IM_ASSERT(lastInsertedNode != nullptr);
