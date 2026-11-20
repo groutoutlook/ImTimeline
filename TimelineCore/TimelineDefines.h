@@ -260,6 +260,7 @@ struct sInputData {
     f32 MouseScrollVertical = 0.0f;
     f32 MouseScrollHorizontal = 0.0f;
     f32 ScrollSpeed = 1.0f; //TODO: allow for more granular slower scroll speeds
+    f32 HorizontalScrollSpeed = 10.0f;
     s32 ScrollDirection = -1;
 };
 

@@ -453,7 +453,7 @@ bool Timeline::DrawTimeline()
         } else {
             mStartFrame += mInputData.MouseScrollVertical * mInputData.ScrollDirection * mInputData.ScrollSpeed;
         }
-        mStartFrame += horizontalScroll * mInputData.ScrollSpeed;
+        mStartFrame += horizontalScroll * mInputData.ScrollSpeed * mInputData.HorizontalScrollSpeed;
     }
     mStartFrame = ImClamp(mStartFrame, mFrameMin, ImMax(mFrameMax - mVisibleFrameCount, mFrameMin));
     mZoom = ImLerp(mZoom, mZoomLerpTarget, 0.10f);
